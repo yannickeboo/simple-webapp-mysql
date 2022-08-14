@@ -14,17 +14,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+   # - name: Build the Docker image
+  #    run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
     - name: Login to DockerHub
       uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-    - name: Build and push Docker image
-      uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
-      with:
-        context: .
-        push: true
-        tags: yannickeboo/actions
+    - name: build
+      run: docker build . --file Dockerfile --tag yannickeboo/actions2
+    - name: pushing 
+      run: docker push yannickeboo/actions2
+   # - name: Build and push Docker image
+   #   uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
+   #   with:
+  #      context: .
+  #      push: true
+  #      tags: yannickeboo/actions
       
